@@ -1,0 +1,16 @@
+<h1 class="sub-header">Create a Group!</h1>
+
+<%= form_for(@group) do |form| %>
+  <div class="field column small-12">
+    <%= form.label :name, class: "text-input-label" %><br>
+    <%= form.text_field :name, class: "text-input-field", placeholder: 'Group Name' %>
+  </div>
+  <div class="field column small-12">
+    <%= form.label :description, class: "text-input-label" %><br>
+    <%= form.text_field :description, class: "text-input-field", placeholder: 'add a description of your group'%>
+  </div>
+  <br>
+  <div class="actions">
+    <%= form.submit "Create a Group!", class: "" %>
+  </div>
+<% end %>
