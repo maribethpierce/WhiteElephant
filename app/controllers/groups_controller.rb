@@ -2,7 +2,12 @@ class GroupsController < ActionController::Base
   before_action :authenticate_user!
 
   def index
-    @groups = Group.all
+    @user = current_user
+    @groups = Group.where(user: @user)
+  end
+
+  def show
+    @group = Group.find(params[:id])
   end
 
   def new
@@ -11,10 +16,10 @@ class GroupsController < ActionController::Base
 
   def create
     @group = Group.new(group_params)
-
+    @user = current_user
     if @group.save
       flash[:notice] = "Group added!"
-      redirect_to @group
+      redirect_to user_groups_path
     else
       flash[:errors] = @group.errors.full_messages.join(', ')
       render :new
