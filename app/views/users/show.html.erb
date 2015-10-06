@@ -16,7 +16,8 @@
     <section class="top-bar-section">
       <ul class="right">
         <%- if current_user -%>
-        <li><%= link_to "Create a Group", new_group_path, method: :get %></li>
+        <li><%= link_to "My Groups", user_groups_path(current_user), method: :get %></li>
+        <li><%= link_to "Create a Group", new_user_group_path(current_user), method: :get %></li>
         <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
         <%- else -%>
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
@@ -31,11 +32,12 @@
       <%= value %>
     </div>
   <%- end -%>
-  <div class="image">
-    <p>
-      Welcome, <%= @user.name %></br>
-      Here are your current groups:
-    </p>
+  <div class="text">
+    <div class="">
+      <p>
+        Welcome, <%= @user.name %></br>
+        Some buttons will go here: edit profile, delete profile...
+      </p>
   </div>
 
   <%= javascript_include_tag 'application' %>

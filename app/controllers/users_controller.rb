@@ -2,8 +2,9 @@ class UsersController < ActionController::Base
   before_action :authenticate_user!
 
   def show
-    @user = User.find(params[:id])
-    # @groups = Group.where(user: @user)
+    @user = current_user
+    @groups = Group.where(user: @user)
+    # binding.pry
   end
 
   def destroy
@@ -17,5 +18,4 @@ class UsersController < ActionController::Base
       redirect_to root_path
     end
   end
-
 end

@@ -8,4 +8,10 @@ FactoryGirl.define do
     password_confirmation 'password'
   end
 
+  factory :group do
+    name "Abacadabera! It's a group!"
+    description "the best group yet!"
+    user
+  end
+
 end
