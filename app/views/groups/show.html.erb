@@ -35,7 +35,18 @@
     <p>
       <%= @group.description %>
     </p>
+  </div>
+  <br>
+  <div>
+    <ul>
+    <% @group.users.each do |member| %>
+    <li><%= member.name %></li>
+    <% end %>
+    </ul>
+  </div>
 
+  <div class="">
+    <%= button_to "Add group members", new_group_membership_path(@group), method: :get %>
   </div>
 
   <%= javascript_include_tag 'application' %>

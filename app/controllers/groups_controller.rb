@@ -17,6 +17,7 @@ class GroupsController < ActionController::Base
   def create
     @group = Group.new(group_params)
     @user = current_user
+    @group.users << current_user
     if @group.save
       flash[:notice] = "Group added!"
       redirect_to user_groups_path
@@ -26,12 +27,39 @@ class GroupsController < ActionController::Base
     end
   end
 
+  def edit
+    @group = Group.find(params[:id])
+  end
+
+  def update
+    binding.pry
+    @group = Group.find(params[:id])
+    @user = current_user
+    @users = User.all
+    # user_params.each do |user|
+    #   @group.users << user
+    # end
+    if @group.update(group_params)
+      flash[:notice] = "Members added!"
+      redirect_to user_group_path(@user, @group)
+    else
+      flash[:errors] = @memberships.errors.full_messages.join('. ')
+      redirect_to user_group_path(@user, @group)
+    end
+  end
+
   private
 
   def group_params
     params.require(:group).permit(
     :name,
-    :description
+    :description,
+    user_ids: []
     ).merge(user_id: current_user.id)
   end
+
+  # def user_params
+  #   params.require(:group).permit(:user_id)
+  # end
+
 end
