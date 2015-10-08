@@ -1,4 +1,4 @@
-class MembershipsController < ActionController::Base
+class MembershipsController < ApplicationController
   before_action :authenticate_user!
 
   def new

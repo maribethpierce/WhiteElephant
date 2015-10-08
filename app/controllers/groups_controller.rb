@@ -1,4 +1,4 @@
-class GroupsController < ActionController::Base
+class GroupsController < ApplicationController
   before_action :authenticate_user!
 
   def index
@@ -32,7 +32,6 @@ class GroupsController < ActionController::Base
   end
 
   def update
-    binding.pry
     @group = Group.find(params[:id])
     @user = current_user
     @users = User.all

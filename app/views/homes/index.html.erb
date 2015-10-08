@@ -1,9 +1,18 @@
-<div class="rules-link">
-  <% if user_signed_in? %>
-    Welcome, <%= current_user.name %>!
-  <% end %>
-  <p>
-    <%= link_to "Common rules", 'https://www.whiteelephantrules.com/' %> for a White Elephant party</br>
-    Check out your groups or create a new one by clicking above.
-  </p>
+<div class="greeting small-4 columns">
+  <div class="row">
+    <% if user_signed_in? %>
+      <h1>Howdy, <%= current_user.name %>!</h1>
+      <hr>
+    <% end %>
+  </div>
 </div>
+  <div class="info small-10  columns end">
+    <p>
+      Welcome to <span class="title">White Elephant</span>. Create a group and add your friends and family.
+      When you're ready,click the button and White Elephant will draw names for each
+      member of your group, ensuring that no one draws their own name, and then
+      send an email to each person letting them know who's name they drew. If you're
+      interested in rules for the gift exchange party, here are some
+      <%= link_to "suggestions", "https://www.whiteelephantrules.com/" %>.
+    </p>
+  </div>

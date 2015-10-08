@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
     resources :groups, except: [:destroy]
-  end
+  end  
   resources :groups do
     resources :memberships
   end
