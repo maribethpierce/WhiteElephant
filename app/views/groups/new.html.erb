@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>WhiteElephant</title>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= csrf_meta_tags %>
-</head>
-<body style="background-image:url(http://i.imgur.com/bYIeAnA.jpg)">
-  <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">White Elephant</a></h1>
-      </li>
-    </ul>
 
-    <section class="top-bar-section">
-      <ul class="right">
-        <%- if current_user -%>
-        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-        <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <%- end -%>
-      </ul>
-    </section>
-  </nav>
-
-  <%- flash.each do |key, value| -%>
-    <div class="flash flash-<%= key %>">
-      <%= value %>
-    </div>
-  <%- end -%>
-  <div class="image">
     <h1 class="sub-header">Create a Group!</h1>
 
     <%= form_for [@user, @group], url: user_groups_path do |form| %>
@@ -43,13 +11,8 @@
         <%= form.text_field :description, class: "text-input-field", placeholder: 'add a description of your group'%>
       </div>
       <br>
-      <div class="actions">
-        <%= form.submit "Create a Group!", class: "" %>
+      <div class="row">
+        <%= form.submit "Create a Group!", class:"button round tiny" %>
       </div>
     <% end %>
   </div>
-
-  <%= javascript_include_tag 'application' %>
-  <%= yield :extra_footer %>
-</body>
-</html>

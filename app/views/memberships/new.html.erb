@@ -1,8 +1,16 @@
-<h1>some big words, here!</h1>
-<%= form_for @group do |f| %>
-
-  <p><%= f.label :user_ids %><br />
-    <%= f.collection_check_boxes(:user_ids, @users, :id, :name)%>
-  </p>
-  <%= f.submit "Add these members" %>
-<% end %>
+<div class="row">
+  <div class="greeting small-6 columns">
+    <h1>Add your peeps!</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="info small-6 columns end">
+    <%= form_for @group do |f| %>
+      <% f.label :user_ids %><br />
+      <%= f.collection_check_boxes(:user_ids, @users, :id, :name)%>
+      <div class="row">
+        <%= f.submit "Add these members", class:"button round tiny" %>
+      </div>
+    <% end %>
+  </div>
+</div>

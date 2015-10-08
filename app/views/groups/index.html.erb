@@ -1,43 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>WhiteElephant</title>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= csrf_meta_tags %>
-</head>
-<body style="background-image:url(http://i.imgur.com/3aMurrj.jpg)">
-
-  <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">White Elephant</a></h1>
-      </li>
-    </ul>
-
-    <section class="top-bar-section">
-      <ul class="right">
-        <%- if current_user -%>
-        <li><%= link_to 'Create a Group', new_user_group_path(current_user), method: :get %></li>
-        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-        <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <%- end -%>
-      </ul>
-    </section>
-  </nav>
-
-  <%- flash.each do |key, value| -%>
-    <div class="flash flash-<%= key %>">
-      <%= value %>
-    </div>
-  <%- end -%>
-  <div class="image">
-    <%= yield %>
+<% content_for :nav do %>
+  <%= link_to 'Create Group', new_user_group_path %>
+<% end %>
+<div class="greeting small-6 columns">
+  <div class="row">
+    <h1>
+      Here are <%= current_user.name %>'s groups:
+    </h1>
+    <hr>
   </div>
-  <div class="text">
+</div>
+<div class="info small-10 columns end">
+  <div class="row">
     <p>
-      Here are <%= current_user.name %>'s groups:<br>
       <ul>
         <% @groups.each do |group| %>
           <li> <%= link_to "#{group.name}", '/users/' + "#{current_user.id}" + '/groups/' + "#{group.id}" %></li>
@@ -45,7 +19,9 @@
       </ul>
     </p>
   </div>
-  <%= javascript_include_tag 'application' %>
-  <%= yield :extra_footer %>
-</body>
-</html>
+</div>
+<div class="">
+  <div class="row">
+    <%= link_to "Create a Group", '/users/' + "#{current_user.id}" + '/groups/new'%>
+  </div>
+</div>

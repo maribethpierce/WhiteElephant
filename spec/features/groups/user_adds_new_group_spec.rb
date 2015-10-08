@@ -13,10 +13,11 @@ feature 'user can add a new group', %{
   feature "User can create group" do
 
     before(:each) do
-      user = FactoryGirl.create(:user)
+      group = FactoryGirl.create(:group)
+      # user = FactoryGirl.create(:user)
       visit new_user_session_path
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
+      fill_in 'Email', with: group.user.email
+      fill_in 'Password', with: group.user.password
       click_button 'Log in'
     end
 
@@ -35,6 +36,32 @@ feature 'user can add a new group', %{
       expect(page).to have_content("Description")
 
     end
-  end
 
+    scenario "User creates a group correctly" do
+      group = FactoryGirl.create(:group)
+
+      visit root_path
+      click_link "My Groups"
+      click_link "Create a Group"
+      fill_in 'Name', with: group.name
+      fill_in 'Description', with: group.description
+      click_button 'Create a Group!'
+
+      expect(page).to have_content(group.name)
+      expect(page).to have_content("Group added!")
+    end
+
+    scenario "User fills out form incorrectly" do
+      group = FactoryGirl.create(:group)
+
+      visit root_path
+      click_link "My Groups"
+      click_link "Create a Group"
+      fill_in 'Description', with: group.description
+      click_button 'Create a Group!'
+
+      expect(page).to_not have_content(group.name)
+      expect(page).to have_content("Name can't be blank")
+    end
+  end
 end
