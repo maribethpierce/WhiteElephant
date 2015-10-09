@@ -21,6 +21,19 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def edit
+    @santas = Membership.find(params[:group_id])
+    @recipients = Membership.find(params[:group_id])
+    @pairs = Pairs.new(pair_params)
+    if @pairs.save
+      flash[:notice] = "Success! Pairings created!"
+      redirect_to user_groups_path
+    else
+      flash[:errors] = @pairs.errors.full_messages.join(', ')
+      render :edit
+    end
+  end
+
   def update
     @group = Group.find(params[:id])
     @user = User.find(params[:id])

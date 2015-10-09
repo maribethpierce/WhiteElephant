@@ -29,6 +29,10 @@ class GroupsController < ApplicationController
 
   def edit
     @group = Group.find(params[:id])
+    @names = []
+    @group.users.each do |user|
+      @names << user.name
+    end
   end
 
   def update

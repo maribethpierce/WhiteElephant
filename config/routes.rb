@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
     resources :groups, except: [:destroy]
-  end  
+  end
   resources :groups do
     resources :memberships
+  end
+  resources :groups do
+    resources :pairs
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
