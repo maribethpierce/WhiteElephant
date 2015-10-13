@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
+  has_many :pairs
+  has_many :groups, through: :pairs
 
   validates :email, uniqueness: true
   validates :name, presence: true
