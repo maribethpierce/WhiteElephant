@@ -21,6 +21,9 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     @group = Group.find(params[:id])
     @user = User.find(params[:id])
