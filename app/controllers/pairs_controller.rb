@@ -39,6 +39,12 @@ class PairsController < ApplicationController
     end
     if @pair.save
       flash[:notice] = "Success! Pairs created!"
+      @drawing.each do |key, value|
+        @santa = key
+        @recipient = value
+        @group = Group.find(params[:group_id])
+        PairMailer.pair_mail(@santa, @recipient, @group).deliver_later
+      end
       redirect_to group_path(@group)
     end
   end
