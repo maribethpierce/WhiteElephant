@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="greeting small-6 columns">
+    <h1>Add your peeps!</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="info small-6 columns end">
+    <fieldset id="group-peeps">
+      <ul>
+        <%= f.fields_for :peeps do |peep| %>
+          <%= render 'peep_fields', f: peep %>
+        <% end %>
+      </ul>
+      <%= link_to_add_association 'Add peep', f, :peeps,
+        'data-association-insertion-node' => "#group-peeps ul",
+        'data-association-insertion-method' => "append",
+        :wrap_object => Proc.new {|peep| peep.build_group; peep }
+      %>
+    </fieldset>
+  </div>
+</div>

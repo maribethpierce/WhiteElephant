@@ -4,6 +4,7 @@ class Group < ActiveRecord::Base
   has_many :users, through: :memberships
   accepts_nested_attributes_for :users
   has_many :pairs
+  has_many :peeps
   # has_many :users, through: :pairs
   accepts_nested_attributes_for :users
 
